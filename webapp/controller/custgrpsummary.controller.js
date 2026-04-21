@@ -4,12 +4,13 @@ sap.ui.define([
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
     "sap/m/MessageToast",
+    "sap/m/MessageBox",
     "sap/m/plugins/CellSelector",
     "sap/m/plugins/CopyProvider",
     "sap/ui/export/Spreadsheet",
     "com/vcerp/zcustgrpsummary/utils/formatter",
     "sap/ui/model/json/JSONModel"
-], (Controller, Filter, FilterOperator, MessageToast, CellSelector, CopyProvider, Spreadsheet, formatter, JSONModel) => {
+], (Controller, Filter, FilterOperator, MessageToast, MessageBox,CellSelector, CopyProvider, Spreadsheet, formatter, JSONModel) => {
     "use strict";
 
     return Controller.extend("com.vcerp.zcustgrpsummary.controller.custgrpsummary", {
@@ -23,6 +24,8 @@ sap.ui.define([
             this.getView().setModel(oUnitModel, "unitModel");
         },
 
+      
+
         onUnitChange: function (oEvent) {
             // SegmentedButton selectionChange provides 'key' (and older might provide item)
             var sKey = oEvent.getParameter("key") ||
@@ -34,6 +37,17 @@ sap.ui.define([
 
             var oUnitModel = this.getView().getModel("unitModel");
             oUnitModel.setProperty("/selectedUnit", sKey);
+        },
+        onPressMe: function () {
+            // This triggers the Message Toast
+            // MessageToast.show("Hello! You pressed the button.");
+
+            MessageBox.information("This is a  message!", {
+                title: "Info",                                      // Title of the window
+                onClose: null,                                       // Callback function after closing
+                styleClass: "sapUiSizeCompact",                      // Ensures it looks good in compact mode
+                actions: [MessageBox.Action.CLOSE]                   // Adds a Close button
+            });
         },
 
 
